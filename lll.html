@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的前端学习主页</title>
+    <link rel="icon" href="https://img0.baidu.com/it/u=1182530321,2875095139&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
+    <style>
+        body {
+            background-color: #67c9d8;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .box {
+            width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        img {
+            width: 120px;
+            border-radius: 50%;
+        }
+        button {
+            padding: 8px 20px;
+            cursor: pointer;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        #statusBtn:hover:not(:disabled) {
+            background-color: #409eff;
+            color: white;
+            border-color: #409eff;
+        }
+        #resetBtn:hover {
+            background-color: #f56c6c;
+            color: white;
+            border-color: #f56c6c;
+        }
+        button:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+        #msg {
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #409eff;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+       <img src="img/a6eb2cb5d1b1c91e9204d1f8a1ecf028.jpg">
+        <h2>我正在学习前端</h2>
+        <p>正在从零学习前端开发，今天是第一天</p >
+        <p>我的目标是掌握知识，做一个静态网页</p >
+
+        <!-- 进度条 -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">学习进度：0%</p >
+
+        <!-- 按钮组 -->
+        <div>
+            <button id="statusBtn" onclick="changeText()">点我查看状态</button>
+            <button id="resetBtn" onclick="resetPage()">重置页面</button>
+        </div>
+
+        <p id="msg">还没点击按钮</p >
+    </div>
+
+    <script>
+        // 点击按钮更新状态
+        function changeText(){
+            const msgEl = document.getElementById("msg");
+            const progressFill = document.getElementById("progressFill");
+            const progressText = document.getElementById("progressText");
+            const statusBtn = document.getElementById("statusBtn");
+
+            // 文字淡入淡出效果
+            msgEl.style.opacity = 0;
+            setTimeout(() => {
+                msgEl.innerText = "已成功完成第一个项目！";
+                msgEl.style.opacity = 1;
+            }, 300);
+
+            // 进度条增长
+            progressFill.style.width = "100%";
+            progressText.innerText = "学习进度：100%";
+
+            // 平滑滚动到状态文字
+            document.getElementById("msg").scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+            // 禁用按钮
+            statusBtn.disabled = true;
+        }
+
+        // 重置页面状态
+        function resetPage(){
+            const msgEl = document.getElementById("msg");
+            const progressFill = document.getElementById("progressFill");
+            const progressText = document.getElementById("progressText");
+            const statusBtn = document.getElementById("statusBtn");
+
+            // 恢复初始文字
+            msgEl.innerText = "还没点击按钮";
+            msgEl.style.opacity = 1;
+
+            // 恢复进度条
+            progressFill.style.width = "0%";
+            progressText.innerText = "学习进度：0%";
+
+            // 恢复按钮可点击状态
+            statusBtn.disabled = false;
+        }
+    </script>
+</body>
+</html>
